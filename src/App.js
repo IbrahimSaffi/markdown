@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import TopBar from './components/Topbar';
+import InputSection from './components/InputSection';
+import OutputSection from './components/OutputSection';
+import { useState } from 'react';
 function App() {
+  let [currText, setText] = useState(" ")
+  function handleChange(newtext) {
+
+    let regH1 = /#(\w+)/gim
+    newtext = newtext.replaceAll(regH1,`<h1>Big Heading</h1>`)
+    setText(newtext)
+   
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TopBar className="menu" />
+      <div className='main-section'>
+        <InputSection handleChange={handleChange}
+          className="input-section" />
+        <OutputSection text={currText} className="output-section" />
+      </div>
     </div>
   );
 }
