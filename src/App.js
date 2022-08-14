@@ -7,7 +7,14 @@ import { useState } from 'react';
 function App() {
   let [currText, setText] = useState(" ")
   function handleChange(newtext) {
-     let i=6
+    let BQToWrite = newtext.match(/(?<=\>).*(?= #)/gi)
+    let BQToReplace = newtext.match(/\>.*(?= #)/gi)
+    if(BQToWrite!==null){
+      BQToReplace.forEach((ele,j) => {
+        newtext=newtext.replace(BQToReplace[j],`<br/><br/><blockqoute>${BQToWrite[j]}</blockqoute>`)
+      });
+    }
+    let i=6
     while(i>=1){
       let rp = `#{${i}}(.*)`
       let wr = `(?<=#{${i}})[a-z 0-9]*`
@@ -20,25 +27,32 @@ function App() {
       }  
       i--
     }
+    let hrToReplace = newtext.match(/---/gim) 
+    if(hrToReplace!==null){
+     hrToReplace.forEach((ele,j)=>{
+        newtext =newtext.replace(hrToReplace[j],`<hr/>`)
+      })
+
+    }
     let listToReplace = newtext.match(/-.*/gi)
     let listToWrite = newtext.match(/(?<=-{1})([a-z 0-9])*/gi)
     if(listToWrite!==null){
-      listToWrite.forEach((ele,i) => {
-        newtext = newtext.replace(listToReplace[i],`<li>${listToWrite[i]}</li>`)
+      listToWrite.forEach((ele,j) => {
+        newtext = newtext.replace(listToReplace[j],`<li>${listToWrite[j]}</li>`)
       });
     }
-    let BQToWrite = newtext.match(/(?<=\>).*(?= #)/gim)
-    let BQToReplace = newtext.match(/\>.*(?= #)/gim)
-    if(BQToReplace!==null){
-      BQToReplace.forEach((ele,i) => {
-        newtext=newtext.replace(BQToReplace[i],`<br><blockqoute>${BQToWrite[i]}</blockqoute>`)
+    let boldToWrite = newtext.match(/(?<=\*\*\*).*(?=\*\*\*)/gim)
+    let boldToReplace = newtext.match(/\*\*\*.*\*\*\*/gim)
+    if(boldToWrite!==null){
+      boldToReplace.forEach((ele,j) => {
+        newtext=newtext.replace(boldToReplace[j],`<b>${boldToWrite[j]}</b>`)
       });
     }
     let codeToWrite = newtext.match(/(?<=\>\.\.).*(?=\.\.\.)/gim)
     let codeToReplace = newtext.match(/\.\.\..*\.\.\./gim)
     if(codeToWrite!==null){
-      codeToReplace.forEach((ele,i) => {
-        newtext=newtext.replace(codeToReplace[i],`<br><code>${codeToWrite[i]}</code>`)
+      codeToReplace.forEach((ele,j) => {
+        newtext=newtext.replace(codeToReplace[j],`<br><code>\'${codeToWrite[j]}\'</code>`)
       });
     }
     setText(newtext)
