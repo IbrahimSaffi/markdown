@@ -1,5 +1,5 @@
 function TopBar(){
-  return (<div>
+  return (<div className="top-bar">
     
   </div>)
 }

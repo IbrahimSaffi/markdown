@@ -1,8 +1,8 @@
 function OutputSection(props){
   return(
-  <div>
-  <p>
-    {props.text}
+  <div className="output-section">
+    <h3 className="label" >PREVIEW</h3>
+  <p dangerouslySetInnerHTML={{__html:props.text}} >
   </p>
   </div>
 
