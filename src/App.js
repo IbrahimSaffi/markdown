@@ -7,11 +7,12 @@ import { useState } from 'react';
 function App() {
   let [currText, setText] = useState(" ")
   function handleChange(newtext) {
-    let BQToWrite = newtext.match(/(?<=\>).*(?= #)/gi)
-    let BQToReplace = newtext.match(/\>.*(?= #)/gi)
+   console.log(newtext)
+    let BQToWrite = newtext.match(/(?<=\>).*(?=\n)/gim)
+    let BQToReplace = newtext.match(/\>.*(?=\n)/gim)
     if(BQToWrite!==null){
       BQToReplace.forEach((ele,j) => {
-        newtext=newtext.replace(BQToReplace[j],`<br/><br/><blockqoute>${BQToWrite[j]}</blockqoute>`)
+        newtext=newtext.replace(BQToReplace[j],`<br/><br/><div class="bq"> ${BQToWrite[j]}</div>`)
       });
     }
     let i=6
@@ -48,15 +49,14 @@ function App() {
         newtext=newtext.replace(boldToReplace[j],`<b>${boldToWrite[j]}</b>`)
       });
     }
-    let codeToWrite = newtext.match(/(?<=\>\.\.).*(?=\.\.\.)/gim)
-    let codeToReplace = newtext.match(/\.\.\..*\.\.\./gim)
-    if(codeToWrite!==null){
-      codeToReplace.forEach((ele,j) => {
-        newtext=newtext.replace(codeToReplace[j],`<br><code>\'${codeToWrite[j]}\'</code>`)
-      });
-    }
+    // let codeToWrite = newtext.match(/(?<=\>\.\.).*(?=\.\.\.)/gim)
+    // let codeToReplace = newtext.match(/\.\.\..*\.\.\./gim)
+    // if(codeToWrite!==null){
+    //   codeToReplace.forEach((ele,j) => {
+    //     newtext=newtext.replace(codeToReplace[j],`<br><code>\'${codeToWrite[j]}\'</code>`)
+    //   });
+    // }
     setText(newtext)
- //Deal with blockqoute
   }
   return (
     <div>

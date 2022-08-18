@@ -13,6 +13,7 @@
   display: flex;
   min-height: 90vh;
   min-width: 100vw;
+  overflow: hidden;
 }
 .title {
   background-color: #1f2024;
@@ -37,6 +38,8 @@
   width: 50vw;
   min-height: 95vh;
   background-color:  #15161b;
+  overflow-wrap: break-word;
+  font-family: sans-serif;
 }
 .output-section *{
   color: gray;
@@ -54,17 +57,21 @@
   margin-left: 20px;
   list-style: none;
 
+
 }
 .output-section li::before{
   content: "\2022";
   color:orange;
   margin-right: 20px;
 }
-blockqoute{
-background-color: red;
+.input-section textarea ,.output-section p{
+  padding: 5px;
+}
+.bq{
 margin-left: 30px;
+margin-right: 30px;
 background-color: #1e1f23;
 border-left: 5px solid orange;
-padding: 20px;
-margin-top: 50px;
+ padding: 20px;
+ overflow-wrap: break-word; 
 }
