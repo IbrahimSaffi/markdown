@@ -39,7 +39,6 @@
   min-height: 95vh;
   background-color:  #15161b;
   overflow-wrap: break-word;
-  font-family: sans-serif;
 }
 .output-section *{
   color: gray;
@@ -66,6 +65,10 @@
 }
 .input-section textarea ,.output-section p{
   padding: 5px;
+}
+.output-section p{
+  font-family: sans-serif;
+
 }
 .bq{
 margin-left: 30px;
